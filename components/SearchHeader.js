@@ -2,7 +2,6 @@ import React from 'react';
 import { Header, Item, Input, Icon, Button } from 'native-base';
 
 const SearchHeader = (props) => {
-    console.log(props);
     return (
         <Header searchBar rounded>
             <Item>

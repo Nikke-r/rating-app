@@ -6,57 +6,34 @@ import RegisterForm from '../components/RegisterForm';
 const AuthView = ({ navigation }) => {
     const [visible, setVisible] = useState(true);
 
+    const toggleForm = () => {
+        visible ? setVisible(false) : setVisible(true);
+    }
+
     return (
         <Container>
-                {visible ? 
-                <Container>
-                    <Header>
-                        <Left>
-                            <Button transparent icon onPress={() => navigation.goBack()}>
-                                <Icon name='arrow-back' />
-                                <Text>Home</Text>
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Text>
-                                Login
-                            </Text>
-                        </Body>
-                        <Right />
-                    </Header>
-                    <Content>
-                    <LoginForm />
-                        <Button transparent full onPress={() => setVisible(false)}>
-                            <Text>
-                                Don't have an accout? Register!
-                            </Text>
-                        </Button>
-                    </Content>
-                </Container>
-                :
-                <Container>
-                    <Header>
-                        <Left>
-                            <Button transparent icon onPress={() => navigation.goBack()}>
-                                <Icon name='arrow-back' />
-                                <Text>Home</Text>
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Text>Register</Text>
-                        </Body>
-                        <Right />
-                    </Header>
-                    <Content>
-                        <RegisterForm />
-                        <Button transparent full onPress={() => setVisible(true)}>
-                            <Text>
-                                Already have an account? Sign in!
-                            </Text>
-                        </Button>
-                    </Content>
-                </Container>
-                }
+            <Header>
+                <Left>
+                    <Button transparent icon onPress={() => navigation.goBack()}>
+                        <Icon name='arrow-back' />
+                        <Text>Home</Text>
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>
+                        {visible ? 'Login' : 'Register'}
+                    </Text>
+                </Body>
+                <Right />
+            </Header>
+            <Content>
+            {visible ? <LoginForm /> :  <RegisterForm />}
+            <Button transparent full onPress={toggleForm}>
+                <Text>
+                    {visible ? 'Create a free account!' : 'Sign in using existing account!'}
+                </Text>
+            </Button>
+            </Content>
         </Container>
     );
 };
