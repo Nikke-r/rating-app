@@ -24,8 +24,7 @@ const constraints = {
     },
     confirmPassword: {
         equality: 'password'
-    },
-
+    }
 }
 
 

@@ -16,7 +16,7 @@ const AuthView = ({ navigation }) => {
                 <Left>
                     <Button transparent icon onPress={() => navigation.goBack()}>
                         <Icon name='arrow-back' />
-                        <Text>Home</Text>
+                        <Text>Back</Text>
                     </Button>
                 </Left>
                 <Body>
