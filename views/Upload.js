@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, Header, Body, Title } from 'native-base';
+import { Container } from 'native-base';
 import UploadForm from '../components/UploadForm';
 
 const Upload = ({ navigation }) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, Item, Input, Icon, Button } from 'native-base';
 import { AsyncStorage } from 'react-native';
 
@@ -11,7 +11,7 @@ const SearchHeader = (props) => {
         } catch (error) {
             console.log('handlePress error: ', error.message);
         }
-    }
+    };
 
     return (
         <Header searchBar rounded>

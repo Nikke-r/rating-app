@@ -42,7 +42,7 @@ const UploadForm = (props) => {
             :
             <Content 
             contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text note style={{textAlign: 'center'}}>Type title of the movie to search it</Text>
+            <Text note style={{textAlign: 'center'}}>Type title of a movie or a series to search it</Text>
             </Content>}
         </Container>
     );

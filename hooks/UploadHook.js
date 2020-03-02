@@ -17,7 +17,7 @@ const uploadHook = () => {
                 cast: file.Actors,
                 duration: file.Runtime
             };
-            
+
             formData.append('title', file.Title);
             formData.append('description', JSON.stringify(details));
             formData.append('file', {uri: file.Poster, name: filename, type})
@@ -45,9 +45,7 @@ const uploadHook = () => {
                 },
                 body: JSON.stringify(data),
             };
-
-            const tagResponse = await fetch('http://media.mw.metropolia.fi/wbma/tags', tagOptions);
-            const tagToJSON = await tagResponse.json();
+            await fetch('http://media.mw.metropolia.fi/wbma/tags', tagOptions);
         } catch (error) {
             console.log('handleUpload error: ', error.message);
         }

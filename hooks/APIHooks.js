@@ -18,4 +18,20 @@ const fetchPost = async (endpoint = '', data = {}) => {
     }
 };
 
-export { fetchPost };
+const fetchGet = async (endpoint = '', params = '', token = '') => {
+    try {
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-access-token': token,
+            }
+        }
+        const response = await fetch(baseURL + '/' + endpoint + '/' + params, options);
+        const toJSON = await response.json();
+        return toJSON;
+    } catch (error) {
+        console.log('fetchGet error: ', error.message);
+    }
+}
+
+export { fetchPost, fetchGet };
