@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container, Item, Input, Icon, Button } from 'native-base';
+import { Header, Container, Item, Input, Icon, Button, Text, Content } from 'native-base';
 import ResultList from './ResultList';
 
 const UploadForm = (props) => {
@@ -27,7 +27,7 @@ const UploadForm = (props) => {
         <Container>
             <Header searchBar rounded>
                 <Item>
-                    <Input placeholder='Search..' onChangeText={text => setQuery(text)} value={query} />
+                    <Input placeholder='Search...' onChangeText={text => setQuery(text)} value={query} />
                     {query ? 
                     <Button danger transparent icon onPress={() => setQuery('')}>
                         <Icon name='close-circle' />
@@ -37,7 +37,13 @@ const UploadForm = (props) => {
                     }
                 </Item>
             </Header>
-            {results ? <ResultList results={results} navigation={props.navigation} /> : null}
+            {results ? 
+            <ResultList results={results} navigation={props.navigation} />
+            :
+            <Content 
+            contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text note style={{textAlign: 'center'}}>Type title of the movie to search it</Text>
+            </Content>}
         </Container>
     );
 };
