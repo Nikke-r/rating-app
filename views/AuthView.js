@@ -27,7 +27,7 @@ const AuthView = ({ navigation }) => {
                 <Right />
             </Header>
             <Content>
-            {visible ? <LoginForm /> :  <RegisterForm />}
+            {visible ? <LoginForm navigation={navigation} /> :  <RegisterForm navigation={navigation} />}
             <Button transparent full onPress={toggleForm}>
                 <Text>
                     {visible ? 'Create a free account!' : 'Sign in using existing account!'}
