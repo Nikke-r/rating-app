@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container, Item, Input } from 'native-base';
+import { Header, Container, Item, Input, Icon, Button } from 'native-base';
 import ResultList from './ResultList';
 
 const UploadForm = (props) => {
@@ -21,12 +21,20 @@ const UploadForm = (props) => {
         if (query !== undefined) {
             find();
         }
-    }, [query])
+    }, [query]);
+
     return (
         <Container>
-            <Header searchBar>
+            <Header searchBar rounded>
                 <Item>
                     <Input placeholder='Search..' onChangeText={text => setQuery(text)} value={query} />
+                    {query ? 
+                    <Button danger transparent icon onPress={() => setQuery('')}>
+                        <Icon name='close-circle' />
+                    </Button>
+                    :
+                    null    
+                    }
                 </Item>
             </Header>
             {results ? <ResultList results={results} navigation={props.navigation} /> : null}
