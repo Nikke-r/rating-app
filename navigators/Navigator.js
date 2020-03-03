@@ -8,6 +8,7 @@ import AuthView from '../views/AuthView';
 import Upload from '../views/Upload';
 import Add from '../views/Add';
 import Profile from '../views/Profile';
+import Details from '../views/Details';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -44,6 +45,7 @@ const Navigator = () => {
                 <Stack.Screen name='Auth' component={AuthView} />
                 <Stack.Screen name='Add' component={Add} />
                 <Stack.Screen name='Profile' component={Profile} />
+                <Stack.Screen name='Details' component={Details} />
             </Stack.Navigator>
         </NavigationContainer>
     );

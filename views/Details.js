@@ -1,9 +1,12 @@
 import React from 'react';
 import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Tabs, Tab } from 'native-base';
 import { Image } from 'react-native';
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/'
 
 const Details = ({ route, navigation }) => {
     const { details } = route.params;
+    const info = JSON.parse(details.description);
+    console.log(info);
 
     return (
         <Container>
@@ -15,29 +18,38 @@ const Details = ({ route, navigation }) => {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Add</Title>
+                    <Title> {details.title} </Title>
                 </Body>
                 <Right />
             </Header>
             <Content scrollEnabled={false}>
                 <Card>
                     <CardItem bordered>
-                        {details.Poster ? <Image source={{uri: details.Poster}} style={{height: 200, width: null, flex: 1}} /> : null}
+                        <Image source={{uri: mediaUrl + details.filename}} style={{height: 300, width: null, flex: 1}} />
+                    </CardItem>
+                    <CardItem bordered>
+                        <Left>
+                            <Body>
+                                <Text> {details.title} </Text>
+                                <Text> Genres: {info.genres}  </Text>
+                                <Text> Duration: {info.duration}  </Text>
+                            </Body>
+                        </Left>
+                        <Right>
+                            <Text> {info.description} </Text>
+                        </Right>
                     </CardItem>
                     <CardItem bordered>
                         <Body>
-                            <Title> {details.Title} </Title>
-                            <Text> Genres: {details.Genre} </Text>
-                            <Text> Duration: {details.Runtime} </Text>
+                        {info.ratings.map(item => {
+                            return (
+                                <Text key={item.id}> {item.Source}: {item.Value} </Text>
+                            )
+                        })}
                         </Body>
                     </CardItem>
                     <CardItem bordered>
-                        {details.Ratings.map(rating => {
-                            <Text> {rating.Source}: {rating.Value} </Text>
-                        })}
-                    </CardItem>
-                    <CardItem bordered>
-                        <Text> {details.Plot} </Text>
+                        <Text> Cast: {info.cast} </Text>
                     </CardItem>
                 </Card>
             </Content>
