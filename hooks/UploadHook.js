@@ -46,6 +46,7 @@ const uploadHook = () => {
                 body: JSON.stringify(data),
             };
             await fetch('http://media.mw.metropolia.fi/wbma/tags', tagOptions);
+            return toJSON;
         } catch (error) {
             console.log('handleUpload error: ', error.message);
         }
