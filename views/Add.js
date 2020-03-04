@@ -71,8 +71,8 @@ const Add = ({ route, navigation }) => {
                 </Header>
                 <Content scrollEnabled={false}>
                     <Card>
-                        <CardItem bordered>
-                            {details.Poster ? <Image source={{uri: details.Poster}} style={{height: 200, width: null, flex: 1}} /> : null}
+                        <CardItem bordered style={{justifyContent: 'center', alignItems: 'center'}}>
+                            {details.Poster ? <Image source={{uri: details.Poster}} style={{height: 200, width: 150}} /> : null}
                         </CardItem>
                         <CardItem bordered>
                             <Body>

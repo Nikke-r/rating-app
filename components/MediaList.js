@@ -109,7 +109,7 @@ const MediaList = (props) => {
             null}
             {scifi.length > 0 ?
             <View>
-            <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Sci-FI</Text>
+            <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Sci-Fi</Text>
             <List
                 dataArray={scifi}
                 horizontal={true}

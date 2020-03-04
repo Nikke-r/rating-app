@@ -102,12 +102,12 @@ const Details = ({ route, navigation }) => {
                     isVisible={modalVisible}
                     onBackdropPress={() => setModalVisible(false)}
                 >
-                    <View style={{backgroundColor: 'white'}}>
+                    <View style={{backgroundColor: 'white', borderRadius: 15}}>
                         <Title style={{padding: 5}}>Write a review</Title>
                         <Form>
                             <Textarea rowSpan={5} bordered placeholder='Review...' onChangeText={text => setUserReview(text)} />
                         </Form>
-                        <Button success full onPress={sendReview}>
+                        <Button success full style={{borderRadius: 15}} onPress={sendReview}>
                             <Text>Send</Text>
                         </Button>
                     </View>
