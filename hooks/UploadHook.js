@@ -1,7 +1,11 @@
-import { fetchPost } from "./APIHooks";
+import { fetchPost, getAll } from "./APIHooks";
 import { AsyncStorage } from "react-native";
+import {useContext} from "react";
+import {MediaContext} from "../contexts/MediaContext";
 
 const uploadHook = () => {
+    const [media, setMedia] = useContext(MediaContext);
+
     const handleUpload = async (file, navigation) => {
         try {
             const token = await AsyncStorage.getItem('token');
@@ -32,6 +36,7 @@ const uploadHook = () => {
             
             const response = await fetch('http://media.mw.metropolia.fi/wbma/media', options);
             const toJSON = await response.json();
+
             const data = {
                 file_id: toJSON.file_id,
                 tag: 'rating-app',
@@ -46,6 +51,7 @@ const uploadHook = () => {
                 body: JSON.stringify(data),
             };
             await fetch('http://media.mw.metropolia.fi/wbma/tags', tagOptions);
+
             return toJSON;
         } catch (error) {
             console.log('handleUpload error: ', error.message);

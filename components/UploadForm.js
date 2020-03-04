@@ -27,22 +27,15 @@ const UploadForm = (props) => {
         <Container>
             <Header searchBar rounded>
                 <Item>
-                    <Input placeholder='Search...' onChangeText={text => setQuery(text)} value={query} />
-                    {query ? 
-                    <Button danger transparent icon onPress={() => setQuery('')}>
-                        <Icon name='close-circle' />
-                    </Button>
-                    :
-                    null    
-                    }
+                    <Input placeholder='Search...' onChangeText={text => setQuery(text)} value={query} clearButtonMode='while-editing' />
                 </Item>
             </Header>
-            {results ? 
+            {results && results.length > 0 ? 
             <ResultList results={results} navigation={props.navigation} />
             :
             <Content 
             contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text note style={{textAlign: 'center'}}>Type title of a movie or a series to search it</Text>
+            <Text note style={{textAlign: 'center'}}>Type title of a movie or a series you want to Upload</Text>
             </Content>}
         </Container>
     );

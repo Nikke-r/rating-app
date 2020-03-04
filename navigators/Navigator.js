@@ -9,6 +9,7 @@ import Upload from '../views/Upload';
 import Add from '../views/Add';
 import Profile from '../views/Profile';
 import Details from '../views/Details';
+import Search from '../views/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,6 +25,8 @@ const TabNavigator = () => {
                         iconName = 'home';
                     } else if (route.name === 'Upload') {
                         iconName = 'cloud-upload';
+                    } else if (route.name === 'Search') {
+                        iconName = 'search';
                     }
     
                     return <Icon name={iconName} />
@@ -32,6 +35,7 @@ const TabNavigator = () => {
             }
         >
             <Tab.Screen name='Home' component={Home} />
+            <Tab.Screen name='Search' component={Search} />
             <Tab.Screen name='Upload' component={Upload} />
         </Tab.Navigator>
     );
