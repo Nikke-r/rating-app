@@ -1,11 +1,46 @@
-import React from 'react';
-import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Tabs, Tab } from 'native-base';
-import { Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Tabs, Tab, View, Form, Textarea } from 'native-base';
+import { Image, AsyncStorage } from 'react-native';
+import {fetchGet, fetchPost} from '../hooks/APIHooks';
+import Modal from 'react-native-modal';
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/'
 
 const Details = ({ route, navigation }) => {
     const { details } = route.params;
     const info = JSON.parse(details.description);
+    const [reviews, setReviews] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [userReview, setUserReview] = useState();
+
+    const getReviews = async () => {
+        try {
+            const response = await fetchGet('comments/file', details.file_id, '');
+            setReviews(response);
+        } catch (error) {
+            console.log('getComments error: ', error.message);
+        }
+    };
+
+    const sendReview = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            const data = {
+                file_id: details.file_id,
+                comment: userReview
+            }
+            const response = await fetchPost('comments', data, token);
+            if (response.comment_id) {
+                getReviews();
+                setModalVisible(false);
+            }
+        } catch (error) {
+            console.log('sendReview error: ', error.message);
+        }
+    }
+
+    useEffect(() => {
+        getReviews();
+    }, []);
 
     return (
         <Container>
@@ -20,15 +55,15 @@ const Details = ({ route, navigation }) => {
                     <Title> {details.title} </Title>
                 </Body>
                 <Right>
-                    <Button transparent>
+                    <Button transparent onPress={() => setModalVisible(true)}>
                         <Text>Review</Text>
                     </Button>
                 </Right>
             </Header>
             <Content>
                 <Card>
-                    <CardItem bordered>
-                        <Image source={{uri: mediaUrl + details.filename}} style={{height: 300, width: null, flex: 1}} />
+                    <CardItem cardBody bordered style={{justifyContent: 'center'}}>
+                        <Image source={{uri: mediaUrl + details.filename}} style={{height: 300, width: 200}} />
                     </CardItem>
                     <CardItem bordered>
                         <Left>
@@ -54,7 +89,29 @@ const Details = ({ route, navigation }) => {
                     <CardItem bordered>
                         <Text> Cast: {info.cast} </Text>
                     </CardItem>
+                    <CardItem>
+                        <Body>
+                            <Button transparent full iconRight onPress={() => navigation.push('Reviews', {reviews: reviews})}>
+                                <Text> Reviews: {reviews.length} </Text>
+                                <Icon name='arrow-forward' />
+                            </Button>
+                        </Body>
+                    </CardItem>
                 </Card>
+                <Modal
+                    isVisible={modalVisible}
+                    onBackdropPress={() => setModalVisible(false)}
+                >
+                    <View style={{backgroundColor: 'white'}}>
+                        <Title style={{padding: 5}}>Write a review</Title>
+                        <Form>
+                            <Textarea rowSpan={5} bordered placeholder='Review...' onChangeText={text => setUserReview(text)} />
+                        </Form>
+                        <Button success full onPress={sendReview}>
+                            <Text>Send</Text>
+                        </Button>
+                    </View>
+                </Modal>
             </Content>
         </Container>
     );

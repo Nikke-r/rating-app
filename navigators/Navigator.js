@@ -10,6 +10,7 @@ import Add from '../views/Add';
 import Profile from '../views/Profile';
 import Details from '../views/Details';
 import Search from '../views/Search';
+import Reviews from '../views/Reviews';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -50,6 +51,7 @@ const Navigator = () => {
                 <Stack.Screen name='Add' component={Add} />
                 <Stack.Screen name='Profile' component={Profile} />
                 <Stack.Screen name='Details' component={Details} />
+                <Stack.Screen name='Reviews' component={Reviews} />
             </Stack.Navigator>
         </NavigationContainer>
     );

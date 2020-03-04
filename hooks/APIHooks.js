@@ -64,4 +64,21 @@ const fetchGet = async (endpoint = '', params = '', token = '') => {
     }
 };
 
-export { getAll, fetchPost, fetchGet };
+const fetchDel = async (endpoint = '', params = '', token = '') => {
+    try {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': token
+            }
+        };
+
+        const response = await fetch(baseURL + '/' + endpoint + '/' + params, options);
+        const toJSON = await response.json();
+        return toJSON;
+    } catch (error) {
+        console.log('fetchdel error: ', error.message);
+    }
+}
+
+export { getAll, fetchPost, fetchGet, fetchDel };

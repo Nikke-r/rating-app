@@ -74,6 +74,7 @@ const MediaList = (props) => {
             <List
                 dataArray={action}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, id) => id.toString()}
                 renderRow={item => <SingleItem item={item} navigation={props.navigation} />}
             /> 
@@ -86,6 +87,7 @@ const MediaList = (props) => {
             <List
                 dataArray={drama}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, id) => id.toString()}
                 renderRow={item => <SingleItem item={item} navigation={props.navigation} />}
             /> 
@@ -98,6 +100,7 @@ const MediaList = (props) => {
             <List
                 dataArray={documentary}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, id) => id.toString()}
                 renderRow={item => <SingleItem item={item} navigation={props.navigation} />}
             /> 
@@ -110,6 +113,7 @@ const MediaList = (props) => {
             <List
                 dataArray={scifi}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, id) => id.toString()}
                 renderRow={item => <SingleItem item={item} navigation={props.navigation} />}
             /> 
@@ -122,6 +126,7 @@ const MediaList = (props) => {
             <List
                 dataArray={comedy}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, id) => id.toString()}
                 renderRow={item => <SingleItem item={item} navigation={props.navigation} />}
             /> 
