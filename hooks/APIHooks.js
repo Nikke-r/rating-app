@@ -29,12 +29,13 @@ const getAll = () => {
     return [data, loading];
 };
 
-const fetchPost = async (endpoint = '', data = {}) => {
+const fetchPost = async (endpoint = '', data = {}, token= '') => {
     try {
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'x-access-token': token
             },
             body: JSON.stringify(data),
         };

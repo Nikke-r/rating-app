@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Root, Toast } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';
 import uploadHook from '../hooks/UploadHook';
+import {MediaContext} from '../contexts/MediaContext';
 
 const Add = ({ route, navigation }) => {
     const { details } = route.params;
     const [token, setToken] = useState();
     const { handleUpload } = uploadHook();
+    const [media, setMedia] = useContext(MediaContext);
 
     const add = async () => {
         try {
@@ -16,9 +18,17 @@ const Add = ({ route, navigation }) => {
                     text: response.message,
                     type: 'success',
                 });
-                setTimeout(() => {
-                    navigation.navigate('Home');
-                }, 1500);
+                const newData = await fetch('http://media.mw.metropolia.fi/wbma/tags/rating-app');
+                const toJSON = await newData.json();
+    
+                const result = await Promise.all(toJSON.map(async (item) => {
+                    const response = await fetch('http://media.mw.metropolia.fi/wbma/media/' + item.file_id);
+                    return await response.json();
+                }));
+
+                setMedia(result);
+
+                navigation.navigate('Home', {screen: 'Home'})
             } else {
                 Toast.show({
                     text: 'Error: ' + response.message,

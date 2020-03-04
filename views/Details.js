@@ -20,9 +20,13 @@ const Details = ({ route, navigation }) => {
                 <Body>
                     <Title> {details.title} </Title>
                 </Body>
-                <Right />
+                <Right>
+                    <Button transparent>
+                        <Text>Review</Text>
+                    </Button>
+                </Right>
             </Header>
-            <Content scrollEnabled={false}>
+            <Content>
                 <Card>
                     <CardItem bordered>
                         <Image source={{uri: mediaUrl + details.filename}} style={{height: 300, width: null, flex: 1}} />
@@ -43,7 +47,7 @@ const Details = ({ route, navigation }) => {
                         <Body>
                         {info.ratings.map(item => {
                             return (
-                                <Text key={item.id}> {item.Source}: {item.Value} </Text>
+                                <Text key={item.Source}> {item.Source}: {item.Value} </Text>
                             )
                         })}
                         </Body>
