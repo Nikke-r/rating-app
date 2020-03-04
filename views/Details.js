@@ -6,7 +6,6 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/'
 const Details = ({ route, navigation }) => {
     const { details } = route.params;
     const info = JSON.parse(details.description);
-    console.log(info);
 
     return (
         <Container>
