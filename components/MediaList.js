@@ -1,3 +1,4 @@
+//List component for Home.js
 import React, { useEffect, useState, useContext} from 'react';
 import {List, Content, View, Text, Picker, Form, Icon, Spinner} from 'native-base';
 import { MediaContext } from '../contexts/MediaContext';
@@ -8,7 +9,7 @@ const MediaList = (props) => {
     const [media, setMedia] = useContext(MediaContext);
     const [data, loading] = getAll();
     const [genres, setGenres] = useState();
-    const [filter, setFilter] = useState('all');
+    const [filter, setFilter] = useState('category');
     setMedia(data);
 
     useEffect(() => {
@@ -56,12 +57,13 @@ const MediaList = (props) => {
                 <Picker
                     mode='dropdown'
                     iosIcon={<Icon name='arrow-down' />}
-                    selectedValue='Category'
+                    selectedValue={filter}
                     onValueChange={value => setFilter(value)}
                 >
+                    <Picker.Item label='Category' value='category' />
                     {genres.map(genre => {
                         return (
-                            <Picker.Item label={genre.genre} value={genre.genre} />
+                            <Picker.Item key={Math.random()} label={genre.genre} value={genre.genre} />
                         )
                     })}
                 </Picker>

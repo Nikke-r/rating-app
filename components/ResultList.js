@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+//List for results in Upload.js
+import React from 'react';
 import { List, ListItem, Text, Thumbnail, Body, Left } from 'native-base';
 
 const ResponseList = (props) => {

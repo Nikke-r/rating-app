@@ -1,3 +1,4 @@
+//After you choose an item in Upload.js you will be taken to here
 import React, { useEffect, useState, useContext } from 'react';
 import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Root, Toast } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';

@@ -1,3 +1,4 @@
+//A single image item in Home.js
 import React from 'react';
 import {Image} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';

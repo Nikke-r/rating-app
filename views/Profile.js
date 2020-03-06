@@ -6,6 +6,7 @@ const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Profile = ({ navigation }) => {
     const [user, setUser] = useState();
+    const [reviews, setReviews] = useState([]);
 
     const getUserInfo = async () => {
         try {
@@ -21,6 +22,17 @@ const Profile = ({ navigation }) => {
         }
     };
 
+    const getOwnReviews = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            const response = await fetchGet('comments', '', token);
+            console.log(response);
+            setReviews(response);
+        } catch (error) {
+            console.log('getOwnReviews error: ', error.message);
+        }
+    }
+
     const logout = async () => {
         try {
             await AsyncStorage.clear();
@@ -29,6 +41,10 @@ const Profile = ({ navigation }) => {
             console.log('logout error: ', error.message);
         }
     };
+
+    useEffect(() => {
+        getOwnReviews();
+    }, [reviews])
 
     useEffect(() => {
         getUserInfo();
@@ -73,6 +89,9 @@ const Profile = ({ navigation }) => {
                     </CardItem>
                     <CardItem footer bordered>
                         <Body>
+                            <Button full onPress={() => navigation.navigate('Reviews', {reviews: reviews})}>
+                                <Text>Own reviews: {reviews.length} </Text>
+                            </Button>
                             <Button danger full onPress={logout}>
                                 <Text>Logout</Text>
                             </Button>
