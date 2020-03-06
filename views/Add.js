@@ -25,7 +25,9 @@ const Add = ({ route, navigation }) => {
                     const response = await fetch('http://media.mw.metropolia.fi/wbma/media/' + item.file_id);
                     return await response.json();
                 }));
-
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].title);
+                }
                 setMedia(result);
 
                 navigation.navigate('Home', {screen: 'Home'})
