@@ -64,6 +64,25 @@ const fetchGet = async (endpoint = '', params = '', token = '') => {
     }
 };
 
+const fetchPut = async (endpoint = '', data = {}, token= '') => {
+    try {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'x-access-token': token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+
+        const response = await fetch(baseURL + '/' + endpoint, options);
+        const toJSON = await response.json();
+        return toJSON;
+    } catch (error) {
+        console.log('fetchPut error: ', error.message);
+    }
+};
+
 const fetchDel = async (endpoint = '', params = '', token = '') => {
     try {
         const options = {
@@ -81,4 +100,4 @@ const fetchDel = async (endpoint = '', params = '', token = '') => {
     }
 }
 
-export { getAll, fetchPost, fetchGet, fetchDel };
+export { getAll, fetchPost, fetchGet, fetchPut, fetchDel };

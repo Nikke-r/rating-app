@@ -56,14 +56,14 @@ const Profile = ({ navigation }) => {
                         </Left>
                         <Body />
                         <Right>
-                            <Button bordered transparent iconRight>
-                                <Text>Edit</Text>
+                            <Button bordered transparent iconRight onPress={() => navigation.navigate('EditProfile')}>
+                                <Text>Edit Profile</Text>
                                 <Icon name='color-wand' />
                             </Button>
                         </Right>
                     </CardItem>
                     <CardItem cardBody>
-                        <Image source={{uri: mediaURL + user.avatar}} style={{width: null, height: 250, flex: 1}} />
+                        {user.avatar ? <Image source={{uri: mediaURL + user.avatar}} style={{width: null, height: 250, flex: 1}} /> : <Text note>No avatar available</Text>}
                     </CardItem>
                     <CardItem>
                         <Body>
