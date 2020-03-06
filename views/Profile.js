@@ -26,7 +26,6 @@ const Profile = ({ navigation }) => {
         try {
             const token = await AsyncStorage.getItem('token');
             const response = await fetchGet('comments', '', token);
-            console.log(response);
             setReviews(response);
         } catch (error) {
             console.log('getOwnReviews error: ', error.message);
@@ -44,9 +43,6 @@ const Profile = ({ navigation }) => {
 
     useEffect(() => {
         getOwnReviews();
-    }, [reviews])
-
-    useEffect(() => {
         getUserInfo();
     }, []);
 
