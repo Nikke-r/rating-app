@@ -38,11 +38,9 @@ const MediaList = (props) => {
                     }
                 })
             })
-            //Remove the first empty object from temporary array and order them aplhabetically
+            //Remove the first empty object from temporary array
             cache.shift();
-            cache.sort();
             setGenres(cache);
-            console.log(cache);
         };
 
         if (media) {
