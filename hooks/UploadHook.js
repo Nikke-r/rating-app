@@ -1,6 +1,5 @@
-import { fetchPost, getAll } from "./APIHooks";
+import { getAll } from "./APIHooks";
 import { AsyncStorage } from "react-native";
-import { useState } from "react";
 
 
 const uploadHook = () => {

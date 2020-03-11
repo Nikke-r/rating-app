@@ -1,6 +1,6 @@
 //List for results in Upload.js
 import React from 'react';
-import { List, ListItem, Text, Thumbnail, Body, Left } from 'native-base';
+import { List, ListItem, Text, Thumbnail, Body } from 'native-base';
 
 const ResponseList = (props) => {
 

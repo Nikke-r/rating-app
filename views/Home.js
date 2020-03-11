@@ -5,6 +5,7 @@ import { AsyncStorage } from 'react-native';
 
 const Home = ({navigation}) => {
 
+    //Handle the top right corner button function. If user is logged in take it to Profile, else to login/register screen
     const handleAuthBtn = async () => {
         try {
             const token = await AsyncStorage.getItem('token');

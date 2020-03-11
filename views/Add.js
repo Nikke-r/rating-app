@@ -11,6 +11,7 @@ const Add = ({ route, navigation }) => {
     const { handleUpload } = uploadHook();
     const [media, setMedia] = useContext(MediaContext);
 
+    //Check if the users has signed in
     const checkAuth = async () => {
         try {
             const tokenFromStorage = await AsyncStorage.getItem('token');

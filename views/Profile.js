@@ -8,6 +8,7 @@ const Profile = ({ navigation }) => {
     const [user, setUser] = useState();
     const [reviews, setReviews] = useState([]);
 
+    //Get the info of the current user from the server
     const getUserInfo = async () => {
         try {
             const token = await AsyncStorage.getItem('token');
@@ -22,6 +23,7 @@ const Profile = ({ navigation }) => {
         }
     };
 
+    //Get reviews user have written
     const getOwnReviews = async () => {
         try {
             const token = await AsyncStorage.getItem('token');
@@ -32,6 +34,7 @@ const Profile = ({ navigation }) => {
         }
     }
 
+    //Handle the logout
     const logout = async () => {
         try {
             await AsyncStorage.clear();

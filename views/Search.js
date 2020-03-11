@@ -3,10 +3,11 @@ import {Container, Header, Content, Item, Input, List, Text, ListItem, Button} f
 
 const Search = ({ navigation }) => {
     const [suggestions, setSuggestions] = useState([]);
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState();
 
+    //Everytime user types something to search bar function will clear the earlier suggestions, get movies based on our tags from the server and compare the search input to movie names
     useEffect(() => {
-        const search = async () => {      
+        const search = async () => {     
             setSuggestions([]);
             try {
                 const getFromServer = await fetch('http://media.mw.metropolia.fi/wbma/tags/rating-app');
@@ -21,16 +22,15 @@ const Search = ({ navigation }) => {
             } catch (error) {
                 console.log('search error: ', error.message);
             }
-        }
-
+        };
         search();
+    }, [query]);
 
-    }, [query])
     return (
         <Container>
             <Header searchBar rounded>
                 <Item>
-                    <Input placeholder='Search...' clearButtonMode='while-editing' onChangeText={text => setQuery(text)} />
+                    <Input placeholder='Search...' clearButtonMode='while-editing' onChangeText={text => setQuery(text)} value={query} />
                 </Item>
             </Header>
             {suggestions.length > 0 ? 

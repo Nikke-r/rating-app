@@ -1,3 +1,4 @@
+//Login component
 import React from 'react';
 import { Form, Item, Input, Label, Button, Text, Toast, Root } from 'native-base';
 import useForms from '../hooks/LoginHook';

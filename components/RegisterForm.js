@@ -1,3 +1,4 @@
+//Register component
 import React from 'react';
 import { Form, Item, Input, Label, Button, Text, Icon, Toast, Root } from 'native-base';
 import useForms from '../hooks/LoginHook';

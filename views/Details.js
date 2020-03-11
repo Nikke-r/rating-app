@@ -13,6 +13,7 @@ const Details = ({ route, navigation }) => {
     const [userReview, setUserReview] = useState();
     const [token, setToken] = useState();
 
+    //Get the reviews (comments) from the server for the current movie
     const getReviews = async () => {
         try {
             const response = await fetchGet('comments/file', details.file_id, '');
@@ -22,6 +23,7 @@ const Details = ({ route, navigation }) => {
         }
     };
 
+    //Get token from storage to authenticate the user (see if the user is signed in or not)
     const getToken = async () => {
         try {
             const tokenFromStorage = await AsyncStorage.getItem('token');
@@ -31,6 +33,7 @@ const Details = ({ route, navigation }) => {
         }
     }
 
+    //Handle new reviews
     const sendReview = async () => {
         try {
             const data = {

@@ -1,6 +1,6 @@
 //List component for Home.js
 import React, { useEffect, useState, useContext } from 'react';
-import {List, Content, View, Text, Picker, Form, Icon, Spinner} from 'native-base';
+import { List, Content, View, Text, Picker, Form, Icon, Spinner } from 'native-base';
 import { MediaContext } from '../contexts/MediaContext';
 import { getAll } from '../hooks/APIHooks';
 import SingleItem from './SingleItem';
@@ -9,7 +9,8 @@ const MediaList = (props) => {
     const [media, setMedia] = useContext(MediaContext);
     const [loading, setLoading] = useState(true);
     const [genres, setGenres] = useState([]);
-    const [filter, setFilter] = useState('category');
+    const [filter, setFilter] = useState('All');
+    const [filteredGenre, setFilteredGenre] = useState();
 
     const getMedia = async () => {
         try {
@@ -19,21 +20,13 @@ const MediaList = (props) => {
         } catch (error) {
             console.log('getMedia error: ', error.message);
         }
-    }
-
-    const filterByGenre = (genre) => {
-        setFilter(genre);
-        for (let i = 0; i < genres.length; i++) {
-            if (genres[i].genre === genre) {
-                setGenres(genres[i]);
-            }
-        }
-    }
+    };
 
     useEffect(() => {
         getMedia();
     }, []);
 
+    //Sort the films by genre
     useEffect(() => {
         const separateGenres = () => {
             //Create temporary array
@@ -73,6 +66,16 @@ const MediaList = (props) => {
         }
     }, [media]);
 
+    //Filter functionality by genre
+    useEffect(() => {
+        if (filter !== 'All') {
+            const result = genres.filter(genre => genre.genre === filter);
+            setFilteredGenre(result);
+        } else {
+            setFilteredGenre();
+        }
+    }, [filter]);
+
     return (
         <Content>
             {loading ? <Spinner /> : 
@@ -82,21 +85,22 @@ const MediaList = (props) => {
                     mode='dropdown'
                     iosIcon={<Icon name='arrow-down' />}
                     selectedValue={filter}
-                    onValueChange={genre => filterByGenre(genre)}
+                    onValueChange={genre => setFilter(genre)}
+                    placeholder='Category'
                 >
-                    <Picker.Item label='Category' value='category' />
+                    <Picker.Item label='All' value='All' />
                     {genres.map(genre => {
                         return (
-                            <Picker.Item key={Math.random()} label={genre.genre} value={genre.genre} />
+                            <Picker.Item key={genre.genre} label={genre.genre} value={genre.genre} />
                         )
                     })}
                 </Picker>
             </Form>
-            {genres ? 
+            {genres && !filteredGenre ? 
             <View>
                 {genres.map(genre => {
                     return (
-                        <View>
+                        <View key={genre.genre}>
                             <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {genre.genre} </Text>
                             <List 
                                 dataArray={genre.movies}
@@ -110,6 +114,16 @@ const MediaList = (props) => {
             </View>
             : null}
             </Content>}
+            {filteredGenre ? 
+            <View>
+                <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {filteredGenre[0].genre} </Text>
+                <List 
+                    dataArray={filteredGenre[0].movies}
+                    keyExtractor={(item, index) => index.toString()}
+                    horizontal={true}
+                    renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
+                />    
+            </View> : null}
         </Content>
     );
 };

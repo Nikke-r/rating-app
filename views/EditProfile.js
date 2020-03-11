@@ -12,6 +12,7 @@ const EditProfile = ({ navigation }) => {
         inputs,
     } = useForms();
 
+    //handle the edit 
     const edit = async () => {
         try {
             const token = await AsyncStorage.getItem('token');

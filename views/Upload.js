@@ -1,3 +1,4 @@
+//This is just a view for upload
 import React from 'react';
 import { Container } from 'native-base';
 import UploadForm from '../components/UploadForm';

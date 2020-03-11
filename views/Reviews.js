@@ -1,5 +1,6 @@
+//This is the review view where all the user reviews are listed
 import React from 'react';
-import {Container, Header, Body, Title, Left, Button, Icon, Right, Content, Card, CardItem, Text, List} from 'native-base';
+import {Container, Header, Body, Title, Left, Button, Icon, Right, Content } from 'native-base';
 import SingleReview from '../components/SingleReview';
 
 const Reviews = ({ route, navigation }) => {

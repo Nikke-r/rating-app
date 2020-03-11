@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container, Item, Input, Icon, Button, Text, Content } from 'native-base';
+import { Header, Container, Item, Input, Text, Content } from 'native-base';
 import ResultList from './ResultList';
 
 const UploadForm = (props) => {

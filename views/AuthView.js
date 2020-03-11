@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Content, View, Button, Text, Header, Body, Left, Icon, Right } from 'native-base';
+import { Container, Content, Button, Text, Header, Body, Left, Icon, Right } from 'native-base';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 
