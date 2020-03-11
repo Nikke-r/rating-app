@@ -35,7 +35,7 @@ const UploadForm = (props) => {
             :
             <Content 
             contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text note style={{textAlign: 'center'}}>Type title of a movie or a series you want to Upload</Text>
+            <Text note style={{textAlign: 'center'}}>Type title of a movie or a series you want to upload</Text>
             </Content>}
         </Container>
     );

@@ -1,12 +1,11 @@
 import { fetchPost, getAll } from "./APIHooks";
 import { AsyncStorage } from "react-native";
-import {useContext} from "react";
-import {MediaContext} from "../contexts/MediaContext";
+import { useState } from "react";
+
 
 const uploadHook = () => {
-    const [media, setMedia] = useContext(MediaContext);
 
-    const handleUpload = async (file, navigation) => {
+    const handleUpload = async (file, navigation, setMedia) => {
         try {
             const token = await AsyncStorage.getItem('token');
             const filename = file.Poster.split('/').pop(); 
@@ -52,7 +51,9 @@ const uploadHook = () => {
             };
             await fetch('http://media.mw.metropolia.fi/wbma/tags', tagOptions);
 
-            return toJSON;
+            const updatedMedia = await getAll();
+            setMedia(updatedMedia);
+            navigation.navigate('Home', {screen: 'Home'});
         } catch (error) {
             console.log('handleUpload error: ', error.message);
         }

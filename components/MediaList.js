@@ -1,5 +1,5 @@
 //List component for Home.js
-import React, { useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {List, Content, View, Text, Picker, Form, Icon, Spinner} from 'native-base';
 import { MediaContext } from '../contexts/MediaContext';
 import { getAll } from '../hooks/APIHooks';
@@ -7,10 +7,19 @@ import SingleItem from './SingleItem';
 
 const MediaList = (props) => {
     const [media, setMedia] = useContext(MediaContext);
-    const [data, loading] = getAll();
-    const [genres, setGenres] = useState();
+    const [loading, setLoading] = useState(true);
+    const [genres, setGenres] = useState([]);
     const [filter, setFilter] = useState('category');
-    setMedia(data);
+
+    const getMedia = async () => {
+        try {
+            const response = await getAll();
+            setMedia(response);
+            setLoading(false);
+        } catch (error) {
+            console.log('getMedia error: ', error.message);
+        }
+    }
 
     const filterByGenre = (genre) => {
         setFilter(genre);
@@ -20,6 +29,10 @@ const MediaList = (props) => {
             }
         }
     }
+
+    useEffect(() => {
+        getMedia();
+    }, []);
 
     useEffect(() => {
         const separateGenres = () => {
