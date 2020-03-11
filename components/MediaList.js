@@ -78,54 +78,54 @@ const MediaList = (props) => {
 
     return (
         <Container>
-            <Form >
-                <Picker
-                    mode='dropdown'
-                    iosIcon={<Icon name='arrow-down' />}
-                    selectedValue={filter}
-                    onValueChange={genre => setFilter(genre)}
-                    placeholder='Category'
-                >
-                    <Picker.Item label='All' value='All' />
+                <Form >
+                    <Picker
+                        mode='dropdown'
+                        iosIcon={<Icon name='arrow-down' />}
+                        selectedValue={filter}
+                        onValueChange={genre => setFilter(genre)}
+                        placeholder='Category'
+                    >
+                        <Picker.Item label='All' value='All' />
+                        {genres.map(genre => {
+                            return (
+                                <Picker.Item key={genre.genre} label={genre.genre} value={genre.genre} />
+                            )
+                        })}
+                    </Picker>
+                </Form>
+            <Content scrollEnabled={true}>
+                {loading ? <Spinner /> : 
+                <Content scrollEnabled={true}>
+                {genres && !filteredGenre ? 
+                <View>
                     {genres.map(genre => {
                         return (
-                            <Picker.Item key={genre.genre} label={genre.genre} value={genre.genre} />
+                            <View key={genre.genre}>
+                                <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {genre.genre} </Text>
+                                <List 
+                                    dataArray={genre.movies}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    horizontal={true}
+                                    renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
+                                />    
+                            </View>
                         )
                     })}
-                </Picker>
-            </Form>
-            {loading ? 
-            <Spinner /> 
-            : 
-            <Content scrollEnabled={true}>
-            {genres && !filteredGenre ? 
-            <View>
-                {genres.map(genre => {
-                    return (
-                        <View key={genre.genre}>
-                            <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {genre.genre} </Text>
-                            <List 
-                                dataArray={genre.movies}
-                                keyExtractor={(item, index) => index.toString()}
-                                horizontal={true}
-                                renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
-                            />    
-                        </View>
-                    )
-                })}
-            </View>
-            : null}
-            </Content>}
-            {filteredGenre ? 
-            <View>
-                <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {filteredGenre[0].genre} </Text>
-                <List 
-                    dataArray={filteredGenre[0].movies}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal={true}
-                    renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
-                />    
-            </View> : null} 
+                </View>
+                : null}
+                </Content>}
+                {filteredGenre ? 
+                <View>
+                    <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {filteredGenre[0].genre} </Text>
+                    <List 
+                        dataArray={filteredGenre[0].movies}
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal={true}
+                        renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
+                    />    
+                </View> : null}
+            </Content>   
         </Container>
     );
 };
