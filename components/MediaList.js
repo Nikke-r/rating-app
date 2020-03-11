@@ -1,6 +1,6 @@
 //List component for Home.js
 import React, { useEffect, useState, useContext } from 'react';
-import { List, Content, View, Text, Picker, Form, Icon, Spinner } from 'native-base';
+import { List, Content, View, Text, Picker, Form, Icon, Spinner, Container } from 'native-base';
 import { MediaContext } from '../contexts/MediaContext';
 import { getAll } from '../hooks/APIHooks';
 import SingleItem from './SingleItem';
@@ -77,10 +77,8 @@ const MediaList = (props) => {
     }, [filter]);
 
     return (
-        <Content>
-            {loading ? <Spinner /> : 
-            <Content>
-            <Form>
+        <Container>
+            <Form >
                 <Picker
                     mode='dropdown'
                     iosIcon={<Icon name='arrow-down' />}
@@ -96,6 +94,10 @@ const MediaList = (props) => {
                     })}
                 </Picker>
             </Form>
+            {loading ? 
+            <Spinner /> 
+            : 
+            <Content scrollEnabled={true}>
             {genres && !filteredGenre ? 
             <View>
                 {genres.map(genre => {
@@ -123,8 +125,8 @@ const MediaList = (props) => {
                     horizontal={true}
                     renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
                 />    
-            </View> : null}
-        </Content>
+            </View> : null} 
+        </Container>
     );
 };
 
