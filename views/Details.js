@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Tabs, Tab, View, Form, Textarea } from 'native-base';
+import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, View, Form, Textarea } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';
-import {fetchGet, fetchPost} from '../hooks/APIHooks';
+import { fetchGet, fetchPost } from '../hooks/APIHooks';
 import Modal from 'react-native-modal';
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/'
 
@@ -11,6 +11,7 @@ const Details = ({ route, navigation }) => {
     const [reviews, setReviews] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [userReview, setUserReview] = useState();
+    const [token, setToken] = useState();
 
     const getReviews = async () => {
         try {
@@ -21,9 +22,17 @@ const Details = ({ route, navigation }) => {
         }
     };
 
+    const getToken = async () => {
+        try {
+            const tokenFromStorage = await AsyncStorage.getItem('token');
+            setToken(tokenFromStorage);
+        } catch (error) {
+            console.log('getToken error: ', error.message);
+        }
+    }
+
     const sendReview = async () => {
         try {
-            const token = await AsyncStorage.getItem('token');
             const data = {
                 file_id: details.file_id,
                 comment: userReview
@@ -40,6 +49,7 @@ const Details = ({ route, navigation }) => {
 
     useEffect(() => {
         getReviews();
+        getToken();
     }, []);
 
     return (
@@ -55,9 +65,9 @@ const Details = ({ route, navigation }) => {
                     <Title> {details.title} </Title>
                 </Body>
                 <Right>
-                    <Button transparent onPress={() => setModalVisible(true)}>
+                    {token ? <Button transparent onPress={() => setModalVisible(true)}>
                         <Text>Review</Text>
-                    </Button>
+                    </Button> : null}
                 </Right>
             </Header>
             <Content>

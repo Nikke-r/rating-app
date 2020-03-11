@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardItem, Text, Left, Body, Right, Button} from 'native-base';
+import {Card, CardItem, Text, Left, Body, Right, Button, Title} from 'native-base';
 import {fetchGet, fetchDel} from '../hooks/APIHooks';
 import {AsyncStorage, Alert} from 'react-native';
 
