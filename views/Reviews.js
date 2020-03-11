@@ -21,7 +21,7 @@ const Reviews = ({ route, navigation }) => {
             <Content>
                 {reviews.map(review => {
                     return (
-                        <SingleReview key={Math.random()} review={review} title={title} navigation={navigation} />
+                        <SingleReview key={Math.random()} review={review} navigation={navigation} />
                     )
                 })}
             </Content>

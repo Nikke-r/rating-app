@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, Root, Toast } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';
 import uploadHook from '../hooks/UploadHook';
-import {MediaContext} from '../contexts/MediaContext';
+import { MediaContext } from '../contexts/MediaContext';
 
 const Add = ({ route, navigation }) => {
     const { details } = route.params;

@@ -12,6 +12,15 @@ const MediaList = (props) => {
     const [filter, setFilter] = useState('category');
     setMedia(data);
 
+    const filterByGenre = (genre) => {
+        setFilter(genre);
+        for (let i = 0; i < genres.length; i++) {
+            if (genres[i].genre === genre) {
+                setGenres(genres[i]);
+            }
+        }
+    }
+
     useEffect(() => {
         const separateGenres = () => {
             //Create temporary array
@@ -26,10 +35,12 @@ const MediaList = (props) => {
 
                 //Separate genres and handle them individually
                 info.genres.split(', ').forEach(genre => {
+
                     //If the genre does not exist in the array, push new genre and the movie under the genre
                     if (!cache.find(name => name.genre === genre)) {
                         cache.push({genre: genre, movies: [{movie: JSON.stringify(item)}]});
                     } else {
+                        
                         //If the genre is in the array already find the index and add the movie
                         for (let i = 0; i < cache.length; i++) {
                             if (cache[i].genre === genre) {
@@ -58,7 +69,7 @@ const MediaList = (props) => {
                     mode='dropdown'
                     iosIcon={<Icon name='arrow-down' />}
                     selectedValue={filter}
-                    onValueChange={value => setFilter(value)}
+                    onValueChange={genre => filterByGenre(genre)}
                 >
                     <Picker.Item label='Category' value='category' />
                     {genres.map(genre => {
@@ -76,9 +87,9 @@ const MediaList = (props) => {
                             <Text style={{fontWeight: 'bold', paddingLeft: 5}}> {genre.genre} </Text>
                             <List 
                                 dataArray={genre.movies}
-                                keyExtractor={(genre, id) => id.toString()}
+                                keyExtractor={(item, index) => index.toString()}
                                 horizontal={true}
-                                renderRow={item => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
+                                renderRow={(item) => <SingleItem item={JSON.parse(item.movie)} navigation={props.navigation} />}
                             />    
                         </View>
                     )
