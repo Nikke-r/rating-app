@@ -88,7 +88,7 @@ const Profile = ({ navigation }) => {
                     </CardItem>
                     <CardItem footer bordered>
                         <Body>
-                            <Button full onPress={() => navigation.navigate('Reviews', {reviews: reviews})}>
+                            <Button full onPress={() => navigation.navigate('Reviews', {reviews: reviews, update: getOwnReviews})}>
                                 <Text>Own reviews: {reviews.length} </Text>
                             </Button>
                             <Button danger full onPress={logout}>

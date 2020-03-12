@@ -43,7 +43,8 @@ const SingleReview = (props) => {
         const deleteReview = async () => {
             try {
                 const token = await AsyncStorage.getItem('token');
-                const response = await fetchDel('comments', props.review.comment_id, token);
+                await fetchDel('comments', props.review.comment_id, token);
+                props.update();
                 props.navigation.goBack();
             } catch (error) {
                 console.log('deleteReview error: ', error.message);

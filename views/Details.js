@@ -44,6 +44,11 @@ const Details = ({ route, navigation }) => {
             if (response.comment_id) {
                 getReviews();
                 setModalVisible(false);
+                Toast.show({
+                    text: 'Review added!',
+                    position: 'top',
+                    type: 'success'
+                })
             }
         } catch (error) {
             console.log('sendReview error: ', error.message);
@@ -110,7 +115,7 @@ const Details = ({ route, navigation }) => {
                     </CardItem>
                     <CardItem>
                         <Body>
-                            <Button transparent full iconRight onPress={() => navigation.push('Reviews', {reviews: reviews})}>
+                            <Button transparent full iconRight onPress={() => navigation.push('Reviews', {reviews: reviews, update: getReviews})}>
                                 <Text> Reviews: {reviews.length} </Text>
                                 <Icon name='arrow-forward' />
                             </Button>

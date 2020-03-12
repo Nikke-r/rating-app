@@ -5,6 +5,7 @@ import SingleReview from '../components/SingleReview';
 
 const Reviews = ({ route, navigation }) => {
     const { reviews } = route.params;
+    const { update } = route.params;
 
     return (
         <Container>
@@ -22,7 +23,7 @@ const Reviews = ({ route, navigation }) => {
             <Content>
                 {reviews.map(review => {
                     return (
-                        <SingleReview key={Math.random()} review={review} navigation={navigation} />
+                        <SingleReview key={review.time_added} update={update} review={review} navigation={navigation} />
                     )
                 })}
             </Content>
