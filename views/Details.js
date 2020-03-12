@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, View, Form, Textarea } from 'native-base';
+import { Container, Content, Text, Header, Body, Title, Left, Icon, Button, Right, Card, CardItem, View, Form, Textarea, Toast, Root } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';
 import { fetchGet, fetchPost } from '../hooks/APIHooks';
 import Modal from 'react-native-modal';
@@ -56,6 +56,7 @@ const Details = ({ route, navigation }) => {
     }, []);
 
     return (
+        <Root>
         <Container>
             <Header>
                 <Left>
@@ -68,9 +69,14 @@ const Details = ({ route, navigation }) => {
                     <Title> {details.title} </Title>
                 </Body>
                 <Right>
-                    {token ? <Button transparent onPress={() => setModalVisible(true)}>
-                        <Text>Review</Text>
-                    </Button> : null}
+                    {token ? 
+                    <Button transparent onPress={() => setModalVisible(true)}>
+                        <Text>Add a review</Text>
+                    </Button> 
+                    : 
+                    <Button transparent onPress={() => Toast.show({text: 'Login to review', position: 'top'})}>
+                        <Text>Add a review</Text>
+                    </Button>}
                 </Right>
             </Header>
             <Content>
@@ -127,6 +133,7 @@ const Details = ({ route, navigation }) => {
                 </Modal>
             </Content>
         </Container>
+        </Root>
     );
 };
 
