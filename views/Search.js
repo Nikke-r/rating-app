@@ -13,7 +13,7 @@ const Search = ({ navigation }) => {
                 const getFromServer = await fetch('http://media.mw.metropolia.fi/wbma/tags/rating-app');
                 const toJSON = await getFromServer.json();
                 for (let i = 0; i < toJSON.length; i++) {
-                    if (query.length > 1) {
+                    if (query) {
                         if (toJSON[i].title.substr(0, query.length).toLowerCase() === query.toLowerCase()) {
                             setSuggestions(suggestions => [...suggestions, toJSON[i]]);
                         }   
