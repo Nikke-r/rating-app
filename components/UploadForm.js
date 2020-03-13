@@ -36,6 +36,7 @@ const UploadForm = (props) => {
             <Content 
             contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Text note style={{textAlign: 'center'}}>Type title of a movie or a series you want to upload</Text>
+            <Text note style={{textAlign: 'center'}}>Results are provided by OMDb</Text>
             </Content>}
         </Container>
     );
